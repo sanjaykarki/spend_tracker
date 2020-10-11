@@ -7,7 +7,7 @@ class Application extends StatelessWidget {
     return MaterialApp(
         title: 'Spend Tracker',
         theme: ThemeData(
-          primaryColor: Colors.purple[700],
+          primarySwatch: Colors.purple,
         ),
         initialRoute: '/',
         routes: routes);

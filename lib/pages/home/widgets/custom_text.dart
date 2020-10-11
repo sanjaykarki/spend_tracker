@@ -11,7 +11,7 @@ class CustomText extends StatelessWidget {
       text,
       style: TextStyle(
         fontSize: 40,
-        color: Colors.red,
+        color: Colors.purple[700],
         decoration: TextDecoration.underline,
       ),
     );

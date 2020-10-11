@@ -105,7 +105,7 @@ class _TotalBudget extends StatelessWidget {
         ),
       ),
       decoration: BoxDecoration(
-        color: Colors.green,
+        color: Colors.purple[700],
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
