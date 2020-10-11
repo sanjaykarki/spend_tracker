@@ -36,18 +36,34 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
+      floatingActionButton: PopupMenuButton(
+        child: Icon(
+          Icons.add_circle,
+          size: 65,
+          color: Theme.of(context).primaryColor,
+        ),
+        itemBuilder: (_) => [
+          PopupMenuItem(
+            value: 1,
+            child: const Text('Deposit'),
+          ),
+          PopupMenuItem(
+            value: 2,
+            child: const Text('Withdraw'),
+          )
+        ],
+        onSelected: (int value) {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (_) => ItemPage(),
+              builder: (_) => ItemPage(
+                isDeposit: value == 1,
+              ),
             ),
           );
         },
-        child: Icon(Icons.add),
-        backgroundColor: Colors.purple[700],
       ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

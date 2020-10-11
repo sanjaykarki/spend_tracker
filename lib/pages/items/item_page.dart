@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class ItemPage extends StatefulWidget {
+  ItemPage({@required this.isDeposit});
+  final bool isDeposit;
   @override
   _ItemPageState createState() => _ItemPageState();
 }
@@ -9,8 +11,14 @@ class ItemPage extends StatefulWidget {
 class _ItemPageState extends State<ItemPage> {
   Map<String, dynamic> _formData = Map<String, dynamic>();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  bool _isDeposit = true;
+  // bool _isDeposit = true;
   DateTime _dateTime = DateTime.now();
+
+  @override
+  void initState() {
+    super.initState();
+    _formData['isDeposit'] = widget.isDeposit;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,10 +52,10 @@ class _ItemPageState extends State<ItemPage> {
               Row(
                 children: [
                   Checkbox(
-                    value: _isDeposit,
+                    value: _formData['isDeposit'],
                     onChanged: (bool value) {
                       setState(() {
-                        _isDeposit = value;
+                        _formData['isDeposit'] = value;
                       });
                     },
                   ),
@@ -72,8 +80,48 @@ class _ItemPageState extends State<ItemPage> {
                       });
                     },
                   ),
-                  Text(DateFormat('MM/dd/yyyy').format(_dateTime)),
+                  Text(DateFormat('dd/MM/yyyy').format(_dateTime)),
                 ],
+              ),
+              DropdownButtonFormField(
+                value: _formData['accountId'],
+                decoration: InputDecoration(labelText: 'Account'),
+                items: [
+                  DropdownMenuItem(
+                    value: 1,
+                    child: const Text('Checking'),
+                  ),
+                  DropdownMenuItem(
+                    value: 2,
+                    child: const Text('Credit Card'),
+                  ),
+                ],
+                validator: (value) => value == null ? 'Required' : null,
+                onChanged: (value) {
+                  setState(() {
+                    _formData['accountId'] = value;
+                  });
+                },
+              ),
+              DropdownButtonFormField(
+                decoration: InputDecoration(labelText: 'Type'),
+                value: _formData['typeID'],
+                items: [
+                  DropdownMenuItem(
+                    value: 1,
+                    child: const Text('Rent'),
+                  ),
+                  DropdownMenuItem(
+                    value: 2,
+                    child: const Text('Dinner'),
+                  ),
+                ],
+                onChanged: (value) {
+                  setState(() {
+                    _formData['typeId'] = value;
+                  });
+                },
+                validator: (value) => value == null ? 'Required' : null,
               ),
             ],
           ),
@@ -87,7 +135,7 @@ class _ItemPageState extends State<ItemPage> {
         },
         label: Text('Save'),
         icon: Icon(Icons.save),
-        backgroundColor: Colors.purple[700],
+        // backgroundColor: Colors.purple[700],
       ),
     );
   }
