@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spend_tracker/pages/home/widgets/menu.dart';
+import 'package:spend_tracker/pages/index.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -22,7 +23,7 @@ class HomePage extends StatelessWidget {
         children: [
           _TotalBudget(amount: amount),
           Container(
-            padding: EdgeInsets.only(bottom: 15),
+            padding: EdgeInsets.only(bottom: 50),
             height: MediaQuery.of(context).size.height - 200,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,6 +35,18 @@ class HomePage extends StatelessWidget {
             ),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => ItemPage(),
+            ),
+          );
+        },
+        child: Icon(Icons.add),
+        backgroundColor: Colors.purple[700],
       ),
     );
   }
